@@ -155,47 +155,47 @@ while True:
 
     elif answer == 5:
         try:
-            cursor.execute("""
+            print(cursor.execute("""
             SELECT customers.customer_id, customers.first_name, 
                    customers.last_name, SUM(orders.quantity) AS total_quantity
             FROM customers
             INNER JOIN orders ON customers.customer_id = orders.customer_id
             GROUP BY customers.customer_id
-            """)
+            """).fetchall())
         except Exception as error:
             print('Помилка!', str(error))
 
     elif answer == 6:
         try:
-            cursor.execute("""
+            print(cursor.execute("""
             SELECT AVG(products.price * orders.quantity) AS avg_sales
             FROM orders
             INNER JOIN products ON orders.product_id = products.product_id;
-            """)
+            """).fetchall())
         except Exception as error:
             print('Помилка!', str(error))
 
     elif answer == 7:
         try:
-            cursor.execute("""
+            print(cursor.execute("""
             SELECT products.product_id, products.category, 
                    COUNT(orders.order_id) AS order_count
             FROM products
             INNER JOIN orders ON products.product_id = orders.product_id
             GROUP BY products.category
             ORDER BY order_count DESC;
-            """)
+            """).fetchall())
         except Exception as error:
             print('Помилка!', str(error))
 
     elif answer == 8:
         try:
-            cursor.execute("""
+            print(cursor.execute("""
             SELECT products.category, 
                    COUNT(products.product_id) AS products_in_category
             FROM products
             GROUP BY products.category;
-            """)
+            """).fetchall())
         except Exception as error:
             print('Помилка!', str(error))
 
